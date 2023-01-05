@@ -1,14 +1,12 @@
 package com.test.dbcrudspringbootapp.controller;
 
-import com.test.dbcrudspringbootapp.core.result.DataResult;
-import com.test.dbcrudspringbootapp.core.result.Result;
 import com.test.dbcrudspringbootapp.dto.CreateUserRequest;
-import com.test.dbcrudspringbootapp.dto.UserDto;
 import com.test.dbcrudspringbootapp.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,22 +17,22 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public Result add(@RequestBody CreateUserRequest createUserRequest) {
-        return userService.add(createUserRequest);
+    public ResponseEntity<?> add(@Valid @RequestBody CreateUserRequest createUserRequest) {
+        return ResponseEntity.ok(userService.add(createUserRequest));
     }
 
     @GetMapping
-    public DataResult<List<UserDto>> getAll() {
-        return userService.getAll();
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(userService.getAll());
     }
 
     @GetMapping("/{id}")
-    public DataResult<UserDto> getById(@PathVariable long id) {
-        return userService.getById(id);
+    public ResponseEntity<?> getById(@PathVariable long id) {
+        return ResponseEntity.ok(userService.getById(id));
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable long id) {
-        return userService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        return ResponseEntity.ok(userService.delete(id));
     }
 }

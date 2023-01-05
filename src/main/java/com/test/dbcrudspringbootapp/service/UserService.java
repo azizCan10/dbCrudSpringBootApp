@@ -35,14 +35,18 @@ public class UserService {
     }
 
     public DataResult<UserDto> getById(long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User couldn't find by id: " + id));
-
-        return new SuccessDataResult<>(userConverter.convert(user), "User listed.");
+        return new SuccessDataResult<>(userConverter.convert(findUserById(id)), "User listed.");
     }
 
     public Result delete(long id) {
+        findUserById(id);
+
         userRepository.deleteById(id);
         return new SuccessResult(id + ". user deleted.");
+    }
+
+    private User findUserById(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User couldn't find by id: " + id));
     }
 }
