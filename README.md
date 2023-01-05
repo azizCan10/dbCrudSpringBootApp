@@ -1,8 +1,11 @@
-## dbCrudSpringBootApp
+## Db Crud Spring Boot App
 
-Written with Java-Spring Boot
+**Technologies**
 
-PostgreSQL used
+* Java - Spring Boot
+* Spring Data JPA
+* Lombok
+* PostgreSQL
 
 java/src/main/resources/application.properties on line 10 and 11;
 
