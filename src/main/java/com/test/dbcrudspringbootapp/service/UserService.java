@@ -8,7 +8,8 @@ import com.test.dbcrudspringbootapp.dto.CreateUserRequest;
 import com.test.dbcrudspringbootapp.dto.UserConverter;
 import com.test.dbcrudspringbootapp.dto.UserDto;
 import com.test.dbcrudspringbootapp.entity.User;
-import com.test.dbcrudspringbootapp.exception.UserNotFoundException;
+import com.test.dbcrudspringbootapp.exception.CustomException;
+import com.test.dbcrudspringbootapp.exception.ErrorStatus;
 import com.test.dbcrudspringbootapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,6 @@ public class UserService {
 
     private User findUserById(long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User couldn't find by id: " + id));
+                .orElseThrow(() -> new CustomException(ErrorStatus.USER_NOT_FOUND));
     }
 }
